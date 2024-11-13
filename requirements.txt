@@ -1,2 +1,8 @@
-flask
-pytest
+
+stage('Install Dependencies') {
+    steps {
+        // Crea y activa un entorno virtual de Python e instala dependencias
+        sh 'python3 -m venv venv'
+        sh '. venv/bin/activate && pip install -r requirements.txt && pip install pylint'
+    }
+}
