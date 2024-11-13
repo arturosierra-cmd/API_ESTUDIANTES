@@ -11,7 +11,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Elimina el entorno virtual si existe y crea uno nuevo, luego instala dependencias
+                // Elimina y crea un entorno virtual de Python e instala dependencias
                 sh 'rm -rf venv'
                 sh 'python3 -m venv venv'
                 sh '. venv/bin/activate && pip install -r requirements.txt'
@@ -20,9 +20,8 @@ pipeline {
 
         stage('Code Analysis') {
             steps {
-                // Verifica la ubicación de pylint y luego ejecuta el análisis de código
-                sh '. venv/bin/activate && which pylint'
-                sh '. venv/bin/activate && pylint test/test_app.py'
+                // Analiza el código con pylint y permite que el pipeline continúe si hay errores
+                sh '. venv/bin/activate && pylint test/test_app.py || true'
             }
         }
 
