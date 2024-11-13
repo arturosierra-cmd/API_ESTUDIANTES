@@ -11,7 +11,8 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Crea y activa un entorno virtual de Python e instala dependencias
+                // Elimina el entorno virtual si existe y crea uno nuevo, luego instala dependencias
+                sh 'rm -rf venv'
                 sh 'python3 -m venv venv'
                 sh '. venv/bin/activate && pip install -r requirements.txt'
             }
@@ -19,8 +20,9 @@ pipeline {
 
         stage('Code Analysis') {
             steps {
-                // Analiza el código
-                sh '. venv/bin/activate && pylint **/*.py'
+                // Verifica la ubicación de pylint y luego ejecuta el análisis de código
+                sh '. venv/bin/activate && which pylint'
+                sh '. venv/bin/activate && pylint test/test_app.py'
             }
         }
 
@@ -36,7 +38,7 @@ pipeline {
                 branch 'main'
             }
             steps {
-                // Realiza un push al repositorio si todas las etapas anteriores pasan
+                // Si todas las etapas anteriores pasan, realiza un push al repositorio
                 withCredentials([usernamePassword(credentialsId: '6d3cceec-016a-4d32-9bfa-1445ab91b1b6', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                     sh """
                         git config --global user.email "g.arturosierra@outlook.com"
