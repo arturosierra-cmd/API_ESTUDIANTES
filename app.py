@@ -5,6 +5,11 @@ app = Flask(__name__)
 # Base de datos simulada en memoria
 estudiantes = []
 
+# Endpoint para la raíz (index)
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({"message": "Bienvenido a la API de estudiantes"}), 200
+
 # Endpoint para crear un nuevo estudiante
 @app.route('/estudiantes', methods=['POST'])
 def crear_estudiante():
@@ -34,4 +39,3 @@ def listar_estudiantes():
 # Punto de entrada de la aplicación
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5000)
-    
