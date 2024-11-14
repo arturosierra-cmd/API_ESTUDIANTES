@@ -1,4 +1,4 @@
-# API de Estudiantes 📚
+# API de Estudiantes 
 
 Este repositorio contiene una API REST desarrollada en Flask para gestionar información básica de estudiantes. La API permite realizar operaciones como crear y listar estudiantes en una base de datos simulada en memoria.
 
@@ -20,6 +20,6 @@ Este repositorio contiene una API REST desarrollada en Flask para gestionar info
 ## 🚀 Ejecución
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
+   https://github.com/arturosierra-cmd/API_ESTUDIANTES.git
 
 ### By: GILBERTO ARTURO SIERRA RAX
